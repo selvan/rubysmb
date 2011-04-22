@@ -304,13 +304,13 @@ static VALUE smbfile_gets(int argc, VALUE *argv, VALUE self)
 
   if (argc == 0) {
     sep = rb_rs;
-    seplen = RSTRING(sep)->len;
+    seplen = RSTRING(sep)->as.heap.len;
   }
   else {
     rb_scan_args(argc, argv, "01", &sep);
     if (!NIL_P(sep)) {
       Check_Type(sep, T_STRING);
-      seplen = RSTRING(sep)->len;
+      seplen = RSTRING(sep)->as.heap.len;
       if (seplen == 0) {
 	sep = rb_str_new2("\n\n");
 	seplen = 2;
@@ -326,7 +326,7 @@ static VALUE smbfile_gets(int argc, VALUE *argv, VALUE self)
     if (file->bufpos == file->read) {
       file_read(file);
       if (file->read == 0) {
-	if (RSTRING(line)->len > 0) {
+	if (RSTRING(line)->as.heap.len > 0) {
 	  rb_lastline_set(line);
 	  rb_gv_set("$.", INT2FIX(++file->lineno));
 	  return line;
@@ -377,13 +377,13 @@ static VALUE smbfile_write(VALUE self, VALUE str)
   rb_secure(4);
   if (TYPE(str) != T_STRING)
     str = rb_obj_as_string(str);
-  if (RSTRING(str)->len == 0) return INT2FIX(0);
+  if (RSTRING(str)->as.heap.len == 0) return INT2FIX(0);
 
   if (smbc_lseek(file->fh, file->pos + file->bufpos, SEEK_SET) < 0) {
     rb_sys_fail(file->url);
   }
  try:
-  if (wrote = smbc_write(file->fh, RSTRING(str)->ptr, RSTRING(str)->len) < 0) {
+  if (wrote = smbc_write(file->fh, RSTRING(str)->as.heap.ptr, RSTRING(str)->as.heap.len) < 0) {
     if (errno == EBADF) {
       reopen(file);
       goto try;
@@ -392,7 +392,7 @@ static VALUE smbfile_write(VALUE self, VALUE str)
   }
 
   if (wrote == 0) /* can't trust libsmbclient =( */
-    wrote = RSTRING(str)->len;
+    wrote = RSTRING(str)->as.heap.len;
   file->bufpos += wrote;
 
   return INT2FIX(wrote);
@@ -431,7 +431,7 @@ static VALUE smbfile_puts(int argc, VALUE *argv, VALUE self)
     }
     line = rb_obj_as_string(line);
     smbfile_write(self, line);
-    if (RSTRING(line)->len == 0 || RSTRING(line)->ptr[RSTRING(line)->len - 1] != '\n') {
+    if (RSTRING(line)->as.heap.len == 0 || RSTRING(line)->as.heap.ptr[RSTRING(line)->as.heap.len - 1] != '\n') {
       smbfile_write(self, rb_default_rs);
     }
   }
@@ -444,8 +444,8 @@ static VALUE puts_ary(VALUE ary, VALUE self)
   VALUE tmp;
   int i;
 
-  for (i = 0; i < RARRAY(ary)->len; i++) {
-    tmp = RARRAY(ary)->ptr[i];
+  for (i = 0; i < RARRAY(ary)->as.heap.len; i++) {
+    tmp = RARRAY(ary)->as.heap.ptr[i];
     if (rb_inspecting_p(tmp)) {
       tmp = rb_str_new2("[...]");
     }
@@ -567,7 +567,7 @@ static VALUE smbfile_read(int argc, VALUE *argv, VALUE self)
       file->bufpos += (file->read - file->bufpos);
       file_read(file);
       if (file->eof) {
-	if (RSTRING(str)->len == 0) {
+	if (RSTRING(str)->as.heap.len == 0) {
 	  return Qnil;
 	}
 	else {
@@ -835,7 +835,7 @@ static VALUE smbfile_delete(int argc, VALUE *argv, VALUE self)
   for (i = 0; i < argc; i++) {
     Check_SafeStr(argv[i]);
 
-    smbc_unlink(RSTRING(argv[i])->ptr);
+    smbc_unlink(RSTRING(argv[i])->as.heap.ptr);
   }
 
   return INT2FIX(argc);
@@ -847,9 +847,9 @@ static VALUE smbfile_dirname(VALUE self, VALUE url)
 
   Check_Type(url, T_STRING);
 
-  p = strrchr(RSTRING(url)->ptr, '/');
+  p = strrchr(RSTRING(url)->as.heap.ptr, '/');
 
-  return rb_str_new(RSTRING(url)->ptr, p - RSTRING(url)->ptr);
+  return rb_str_new(RSTRING(url)->as.heap.ptr, p - RSTRING(url)->as.heap.ptr);
 }
 
 static VALUE smbfile_stat(VALUE self)

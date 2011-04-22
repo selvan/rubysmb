@@ -286,8 +286,8 @@ static VALUE smbdir_delete(VALUE self, VALUE url)
 {
   Check_SafeStr(url);
 
-  if (smbc_rmdir(RSTRING(url)->ptr) < 0) {
-    rb_sys_fail(RSTRING(url)->ptr);
+  if (smbc_rmdir(RSTRING(url)->as.heap.ptr) < 0) {
+    rb_sys_fail(RSTRING(url)->as.heap.ptr);
   }
 
   return INT2FIX(0);
@@ -317,8 +317,8 @@ static VALUE smbdir_mkdir(int argc, VALUE *argv, VALUE self)
     mode = NUM2INT(rmode);
   }
 
-  if (smbc_mkdir(RSTRING(url)->ptr, (mode_t)mode) < 0) {
-    rb_sys_fail(RSTRING(url)->ptr);
+  if (smbc_mkdir(RSTRING(url)->as.heap.ptr, (mode_t)mode) < 0) {
+    rb_sys_fail(RSTRING(url)->as.heap.ptr);
   }
 
   return INT2FIX(0);

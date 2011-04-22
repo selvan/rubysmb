@@ -203,8 +203,8 @@ static VALUE smbutil_simplify(VALUE self)
   VALUE url;
 
   url = rb_funcall(self, url_id, 0);
-  buf = ALLOC_N(char, RSTRING(url)->len);
-  strcpy(buf, RSTRING(url)->ptr);
+  buf = ALLOC_N(char, RSTRING(url)->as.heap.len);
+  strcpy(buf, RSTRING(url)->as.heap.ptr);
   util_simplify_url(buf);
   url = rb_str_new2(buf);
   free(buf);
@@ -219,8 +219,8 @@ static VALUE smbutil_m_simplify(VALUE self, VALUE url)
 
   Check_Type(url, T_STRING);
 
-  buf = ALLOC_N(char, RSTRING(url)->len + 1);
-  strcpy(buf, RSTRING(url)->ptr);
+  buf = ALLOC_N(char, RSTRING(url)->as.heap.len + 1);
+  strcpy(buf, RSTRING(url)->as.heap.ptr);
   util_simplify_url(buf);
   nurl = rb_str_new2(buf);
   free(buf);
@@ -248,7 +248,7 @@ static VALUE util_geturlary(VALUE obj)
     VALUE ary = rb_ary_new();
 
     url = rb_funcall(obj, url_id, 0);
-    url_p = RSTRING(url)->ptr;
+    url_p = RSTRING(url)->as.heap.ptr;
     if (!util_parse_url(url_p,
 		       &server_i, &server_len,
 		       &share_i, &share_len,
@@ -299,8 +299,8 @@ static VALUE smbutil_stat(VALUE self)
   struct stat st;
 
   url = rb_funcall(self, rb_intern("url"), 0);
-  if (smbc_stat(RSTRING(url)->ptr, &st) < 0) {
-    rb_sys_fail(RSTRING(url)->ptr);
+  if (smbc_stat(RSTRING(url)->as.heap.ptr, &st) < 0) {
+    rb_sys_fail(RSTRING(url)->as.heap.ptr);
   }
 
   return stat_new(&st);

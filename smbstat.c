@@ -51,8 +51,8 @@ static VALUE smbstat_s_stat(VALUE self, VALUE url)
 
   Check_SafeStr(url);
 
-  if (smbc_stat(RSTRING(url)->ptr, &st) < 0) {
-    rb_sys_fail(RSTRING(url)->ptr);
+  if (smbc_stat(RSTRING(url)->as.heap.ptr, &st) < 0) {
+    rb_sys_fail(RSTRING(url)->as.heap.ptr);
   }
 
   return stat_new(&st);

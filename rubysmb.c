@@ -66,8 +66,8 @@ VALUE smb_rename(VALUE self, VALUE oldurl, VALUE newurl)
   Check_SafeStr(oldurl);
   Check_SafeStr(newurl);
 
-  if (smbc_rename(RSTRING(oldurl)->ptr, RSTRING(newurl)->ptr) < 0) {
-    rb_sys_fail(RSTRING(oldurl)->ptr);
+  if (smbc_rename(RSTRING(oldurl)->as.heap.ptr, RSTRING(newurl)->as.heap.ptr) < 0) {
+    rb_sys_fail(RSTRING(oldurl)->as.heap.ptr);
   }
 
   return INT2FIX(0);
@@ -79,8 +79,8 @@ VALUE smb_stat(VALUE self, VALUE url)
 
   Check_SafeStr(url);
 
-  if (smbc_stat(RSTRING(url)->ptr, &st) < 0) {
-    rb_sys_fail(RSTRING(url)->ptr);
+  if (smbc_stat(RSTRING(url)->as.heap.ptr, &st) < 0) {
+    rb_sys_fail(RSTRING(url)->as.heap.ptr);
   }
 
   return stat_new(&st);
@@ -109,34 +109,34 @@ static void auth_fn(const char *server, const char *share,
   if (TYPE(ary) != T_ARRAY) {
     return;
   }
-  if (RARRAY(ary)->len != 3) {
+  if (RARRAY(ary)->as.heap.len != 3) {
     rb_raise(eSmbError, "array should contain workgroup, username and password to use as authentication");
   }
   
-  wg = RARRAY(ary)->ptr[1];
-  un = RARRAY(ary)->ptr[0];
-  pw = RARRAY(ary)->ptr[2];
+  wg = RARRAY(ary)->as.heap.ptr[1];
+  un = RARRAY(ary)->as.heap.ptr[0];
+  pw = RARRAY(ary)->as.heap.ptr[2];
 
   if (!NIL_P(wg)) {
     Check_SafeStr(wg);
-    if (RSTRING(wg)->len > wgmaxlen - 1) {
+    if (RSTRING(wg)->as.heap.len > wgmaxlen - 1) {
       rb_raise(eSmbError, "workgroup too long");
     }
-    strcpy(workgroup, RSTRING(wg)->ptr);
+    strcpy(workgroup, RSTRING(wg)->as.heap.ptr);
   }
   if (!NIL_P(un)) {
     Check_SafeStr(un);
-    if (RSTRING(un)->len > unmaxlen - 1) {
+    if (RSTRING(un)->as.heap.len > unmaxlen - 1) {
       rb_raise(eSmbError, "username too long");
     }
-    strcpy(username, RSTRING(un)->ptr);
+    strcpy(username, RSTRING(un)->as.heap.ptr);
   }
   if (!NIL_P(pw)) {
     Check_SafeStr(pw);
-    if (RSTRING(pw)->len > pwmaxlen - 1) {
+    if (RSTRING(pw)->as.heap.len > pwmaxlen - 1) {
       rb_raise(eSmbError, "password too long");
     }
-    strcpy(password, RSTRING(pw)->ptr);
+    strcpy(password, RSTRING(pw)->as.heap.ptr);
   }
 }
 
