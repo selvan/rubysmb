@@ -19,7 +19,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 #include <libsmbclient.h>
 #include <ruby.h>
-#include <rubyio.h>
+#include <ruby/io.h>
 #include <stdio.h>
 #include <errno.h>
 #include <stdlib.h>
@@ -87,7 +87,7 @@ static VALUE smbdir_new(VALUE self, VALUE url)
 
   Check_SafeStr(url);
 
-  urlp = STR2CSTR(url);
+  urlp = StringValuePtr(url);
 
   dh = smbc_opendir(urlp);
   if (dh < 0) {

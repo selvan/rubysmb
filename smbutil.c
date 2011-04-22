@@ -19,7 +19,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 #include <libsmbclient.h>
 #include <ruby.h>
-#include <rubyio.h>
+#include <ruby/io.h>
 #include <errno.h>
 #include <string.h>
 #include <stdbool.h>

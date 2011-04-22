@@ -19,7 +19,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 #include <libsmbclient.h>
 #include <ruby.h>
-#include <rubyio.h>
+#include <ruby/io.h>
 #include <stdio.h>
 #include <errno.h>
 #include <stdlib.h>
@@ -186,14 +186,14 @@ static VALUE smbfile_new(int argc, VALUE *argv, VALUE self)
 
   Check_SafeStr(rurl);
 
-  url = STR2CSTR(rurl);
+  url = StringValuePtr(rurl);
   if (FIXNUM_P(vmode))
     {
       flags = NUM2INT(vmode);
     }
   else
     {
-      mode = NIL_P(vmode) ? "r" : STR2CSTR(vmode);
+      mode = NIL_P(vmode) ? "r" : StringValuePtr(vmode);
       flags = mode_flags(mode);
     }
   

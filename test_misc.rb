@@ -132,4 +132,4 @@ class RubySMBMiscTest < Test::Unit::TestCase
   end
 end
 
-RUNIT::CUI::TestRunner.new.run RubySMBMiscTest.suite
+RubySMBMiscTest.suite
