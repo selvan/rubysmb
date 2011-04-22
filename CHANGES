@@ -1,0 +1,53 @@
+Changes since beta-3:
+
+ * Added SMB::Stat#mode
+
+ * extconf.rb now makes use of CPPFLAGS
+
+Changes since beta-2:
+
+ * Fixed segfault bug during garb of SMB::Dir (hopefully)
+
+ * Serious speed improvements when combining reading and writing of file
+
+ * Added checks to see if dir has been closed in SMB::Dir
+
+ * Bug in SMB::File#write patched by Takaaki Tateishi
+
+ * Fixed some Ruby 1.7 syntax changes in the test code
+
+ * smbclient.rb:
+   cooler directory listing, directory get command (dget)
+   changed multiplication to exponentiation so file sizes are now correct
+     [please don't tell Dept. of Mathematics ;o)]
+
+
+Changes since beta-1:
+
+ * Files are automatically reconnected if connection is lost
+
+ * Authentication support (SMB::on_authentication)
+
+ * Fixed a stupid segfault bug in SMB::Dir code
+
+ * smbclient.rb:
+   authentication, command queueing, recursive get command (rget)
+   bandwidth limit (--bandwidth arg), resumes broken downloads (rget)
+   --verbose option
+
+
+Changes since alpha-1:
+
+ * Defined SMB::File::SEPARATOR
+
+ * Implemented SMB::Util#simplify
+
+ * Fixed SMB::File#ungetch
+
+ * Alias SMB::Dir#direntries for SMB::Dir#to_a
+
+ * Improved unit tests: url parsing, safechecking, types, seek
+
+ * Added SMB::File::Stat class and SMB.stat, SMB::File#stat
+
+ * Fixed SMB::File#seek with SEEK_END

@@ -1,0 +1,37 @@
+INSTALLATION
+install by running:
+
+ruby extconf.rb   # Option --with-smb-dir=/usr/local/samba-x.x.x
+                  # to specify location of samba lib.
+make
+
+make install      # As root, perhaps.
+
+Also: make sure you have a file named smb.conf in a directory named .smb in
+your home directory (ie ~/.smb/smb.conf), or libsmbclient won't load.
+(It will fail and raise a "file not found".) It's possible you have such a
+file named /etc/smb.conf, but if it doesn't work, just copy that one...
+You might want to put config in it (such as WINS server, hostname,
+internationalization options, etc). See the smb.conf man file for details.
+
+
+LIBSMBCLIENT
+Ruby/SMB requires libsmbclient, a library included in samba.
+To get it, go to http://www.samba.org/ and download the latest version, untar
+it, and run:
+
+./configure --prefix=/usr/local # Or perhaps some other dir,
+                                # will only install in lib and include.
+make libsmbclient
+
+make installclientlib
+
+ * Samba 2.2:
+   My computer had problems with its 'make installclientlib'. Use
+   '/usr/bin/install bin/libsmbclient.so /usr/local/lib' to install if this is
+   the case (or some other destination) and run ldconfig, as usual.
+
+ * Samba 3.0:
+   Note that samba 3.0 is alpha, so you might have to tweak the code a bit to
+   get it to compile. Some things aren't working as they should either, but
+   in general, it's usable. I use it. =)

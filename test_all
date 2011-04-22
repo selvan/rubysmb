@@ -1,0 +1,4 @@
+#!/bin/sh
+ruby test_file.rb
+ruby test_dir.rb
+ruby test_misc.rb

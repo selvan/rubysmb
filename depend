@@ -1,0 +1,5 @@
+rubysmb.o: rubysmb.c rubysmb.h smbfile.h smbstat.h smbdir.h smbutil.h
+smbdir.o: smbdir.c rubysmb.h smbdir.h smbfile.h
+smbfile.o: smbfile.c rubysmb.h smbfile.h
+smbstat.o: smbstat.c rubysmb.h smbstat.h
+smbutil.o: smbutil.c rubysmb.h smbstat.h
