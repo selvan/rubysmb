@@ -1,9 +1,9 @@
-require "runit/testcase"
-require "runit/testsuite"
-require "runit/cui/testrunner"
+require "test/unit"
+require "test/unit/assertions"
+require "test/unit/testcase"
 require "smb"
 
-class RubySMBMiscTest < RUNIT::TestCase
+class RubySMBMiscTest < Test::Unit::TestCase
   def setup
     @base = "smb://stargazer/porr/"
   end

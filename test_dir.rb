@@ -1,6 +1,6 @@
-require "runit/testcase"
-require "runit/testsuite"
-require "runit/cui/testrunner"
+require "test/unit"
+require "test/unit/assertions"
+require "test/unit/testcase"
 require "smb"
 
 # Should be in standard lib, IMHO
@@ -10,7 +10,7 @@ class Array
   end
 end
 
-class RubySMBDirTest < RUNIT::TestCase
+class RubySMBDirTest < Test::Unit::TestCase
   def setup
     @base = "smb://stargazer/porr/"
   end
