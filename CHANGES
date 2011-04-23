@@ -1,3 +1,10 @@
+Changes since beta-4:
+ * changed *.c files to use 1.9.x versions of ruby.h
+ * changed deps to #include <ruby/io.h> instead of <rubyio.h>
+ * modified directory structure to be more in line w/ best practices (and prepare to gemify)
+ * changed extconf.rb to explicitly load libsmbclient.h
+ * got rid of RUnit::TestCase refs in test code (test code still broken, will rewrite in RSpec)
+
 Changes since beta-3:
 
  * Added SMB::Stat#mode

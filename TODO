@@ -1,0 +1,6 @@
+TODO:
+
+ * Gemify project (create Rakefile, rubysmb.gemspec)
+ * Write new tests (RSpec)
+ * replace deprecated C function calls (rb_check_safe_str)
+ * check (remove?) 64-bit to 32-bit coercions to see if they matter
