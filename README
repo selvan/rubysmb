@@ -10,8 +10,8 @@ This file contains:
 
 REQUIREMENTS
 
- * Ruby (tested with versions 1.6.4 and 1.6.6)
- * libsmbclient, from samba 2.2 or 3.0
+ * Ruby 1.9.2
+ * libsmbclient, from samba 3.x
 
 Get libsmbclient by downloading samba from http://www.samba.org/
 (see INSTALL file for install info).
@@ -21,21 +21,17 @@ USAGE
 Once installed (see INSTALL file), in your Ruby program, do:
 require 'smb'
 
-This loads the library, which defines the SMB module. See library
-documentation in the doc/ directory.
+This loads the library, which defines the SMB module. 
 
 
 LICENSE
-Ruby/SMB is copyright (c) 2002 Henrik Falck.
+Based on Ruby/SMB, copyright (c) 2002 Henrik Falck.
 It is released under the GNU General Public License.
 See LICENSE file for details.
 
 
 CONTACT
-Please report bugs and request features at the SourceForge project
-home page or by mail.
+Please report bugs and request features at the GitHub project.
 
-web:  http://rubysmb.sourceforge.net/
-mail: hefa@users.sourceforge.net
-irc:  hefa in #ruby-lang on irc.openprojects.net
-icq:  1042583
+web:  https://github.com/canweriotnow
+email: jasonlewis dot x at github dot com
