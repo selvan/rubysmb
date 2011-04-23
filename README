@@ -26,6 +26,7 @@ This loads the library, which defines the SMB module.
 
 LICENSE
 Based on Ruby/SMB, copyright (c) 2002 Henrik Falck.
+This fork copyleft (c) 2011 Jason Lewis.
 It is released under the GNU General Public License.
 See LICENSE file for details.
 
@@ -33,5 +34,5 @@ See LICENSE file for details.
 CONTACT
 Please report bugs and request features at the GitHub project.
 
-web:  https://github.com/canweriotnow
+web:  https://github.com/canweriotnow/rubysmb
 email: jasonlewis dot x at github dot com
