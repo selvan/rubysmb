@@ -3,3 +3,4 @@ ext/**/*.o
 lib/*.o
 lib/*.so
 .idea
+tmp
