@@ -1,2 +1,5 @@
-lib/ext/Makefile
-lib/ext/*.o
+ext/**/Makefile
+ext/**/*.o
+lib/*.o
+lib/*.so
+.idea

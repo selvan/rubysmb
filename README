@@ -1,5 +1,7 @@
 Ruby/SMB - Ruby interface to the samba libsmbclient library.
 
+I have changed folder structures & files to create a gem that can be used with bundler. Code from upstream repository is untouched.
+
 This file contains:
 
  * Requirements
